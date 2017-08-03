@@ -16,6 +16,7 @@ console.log(pFunc(dfg));*/
 
 console.log(dfg.valueOf());
 console.log(s);
+console.log(dfg);
 
 
 /*Write function parseFloat (for Javascript parseF) 

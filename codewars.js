@@ -15,7 +15,7 @@ pFunc(dfg);
 console.log(pFunc(dfg));*/
 
 console.log(dfg.valueOf());
-
+console.log(dfg);
 
 /*Write function parseFloat (for Javascript parseF) 
 which takes a string and returns a number or Nothing 

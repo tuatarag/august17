@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+
+<style>
+
+body {
+	text-align: center;
+	margin-top: 200px;
+	background: url("squat_boys.png") left no-repeat, url("squat_girls.png") right bottom no-repeat;
+}
+
+
+#select1 {
+	display: inline-block;
+	width: 200px;
+	height: 40px;
+	/* border:solid grey 2px;  */
+	text-align: center;
+	vertical-align: bottom;
+	font-size: 18px;
+}
+
+#form2 {
+	display: inline-block;
+	width: 200px;
+	height: 40px;
+	/* border:solid grey 2px;   */
+	text-align: center;
+	vertical-align: bottom;
+	font-size: 18px;
+	margin-top: 70px;
+}
+
+#button1 {
+	display: inline-block;
+	width: 35px;
+	height: 35px;
+	font-size: 18px;
+	background-color: azure;
+
+}		
+#button2 {
+	display: inline-block;
+	width: 35px;
+	height: 35px;
+	font-size: 18px;
+	background-color: beige;
+
+}
+
+#repetit {
+	display: inline-block;
+	width: 45px;
+	height: 35px;
+	font-size: 18px;
+}
+#select2 {
+	display: inline-block;
+	width: 200px;
+	height: 40px;
+	/* border:solid grey 2px;  */
+	text-align: left;
+	vertical-align: bottom;
+	font-size: 18px;
+}
+
+
+		
+</style>
+</head>
+
+<body>
+<img src="">
+<form>
+	<select id="select1"> 
+
+   </select> 
+
+   	<select id="select2"> 
+	
+	</select>
+</form>
+
+<form id="form2">
+	<input type="button" value="+" id="button1">
+	<input type="number" value="0" min="0" max="20" id="repetit">
+	<input type="button" value="-" id="button2">
+
+</form>
+
+<script type="text/javascript">
+
+	var exercises = {
+	    chest: ["bench press", "inclined bench", "butterfly"]
+	    , back: ["pull up", "barbell row", "dumbbell row"]
+	    , leg: ["squats", "deadlift", "front Squat"]
+	    , bicep: ["barbell curl", "dumbbell curl", "hammer curl"]
+	    , tricep: ["close-grip bench", "skull crusher", "kickback"]
+	};
+
+
+
+	var bodyPart = document.getElementById("select1");
+	var exerciseType = document.getElementById("select2");
+
+	for (var key in exercises) {
+		bodyPart.innerHTML += "<option>" + key + "<option>";
+	}
+
+
+
+//  function for inserting the proper options ito the exerciseType select element.
+// this shoudl get the current valuefrom bodyPart select and use that to set the exerciseType slelect opions
+
+
+	function partSelected () {
+
+		var theseExerArr = exercises[bodyPart.value];
+// Using the current value of bodyPart as key for  exercises object , wchich gets us the array
+
+		exerciseType.innerHTML ="";
+		for (var i = 0; i < theseExerArr.length; i++) {
+			exerciseType.innerHTML += "<option>" + theseExerArr[i] +"<option>";
+		}
+	}
+
+		bodyPart.addEventListener("change", partSelected);
+
+		/*// when the page first loads,let s makesure the exerciseType does not start as blank.
+
+	};
+*/
+	
+	var boutonPlus = document.getElementById("button1");
+	var boutonMinus = document.getElementById("button2"); 
+	var count = 0;
+	var box = document.getElementById("repetit"); 
+	
+	boutonPlus.addEventListener("click",function () {
+		
+		 box.value = ++count;
+	});
+
+	boutonMinus.addEventListener("click", function(){
+		box.value = box.value-1
+
+	});
+	
+	
+
+
+	
+
+
+
+	/*function chestFunction () { console.log("check");};*/
+	/*var chestOption = document.getElementById("chest");
+	for ( key)
+	var secondBar = document.getElementById("select1").multiple;
+	if (secondBar.value >=3 ) {
+	}*/
+	
+
+</script>
+	
+
+
+</body>
+</html>
+
+
+
+
+

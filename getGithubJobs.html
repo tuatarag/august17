@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+<style type="text/css">
+	body {
+		text-align: center;
+		margin: 100px 100px 100px 100px;
+		background-color: lightblue;
+	}
+	#searchResults {
+		border :1px solid grey;
+		width: auto;
+		height: 500px;
+		/* margin-left: 380px; */
+		background-color:beige;
+		border-radius: 5px;
+		text-align: left;
+	}
+	#doIneedOne {
+
+	}
+	#doIneedOne:hover {
+		background-color: cornflowerblue;
+	}
+
+</style>
+
+</head>
+<body>
+ <h4> JOB SEARCH </h4>
+	<form>
+		<input type="" name="" id="city" placeholder="CITY">
+		<input type="" name="" id="title" placeholder="KEYWORD">
+		<input type="button" id="doIneedOne" name="go" value="SUBMIT">
+
+	</form>
+	<br>
+	<div id="searchResults"> 
+	
+	</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script type="text/javascript">
+
+	var myResults =$("#searchResults");
+	var button =$("#doIneedOne");
+	
+	var title = $("#title").val();
+	var locat =$("#city").val();
+
+	button.click(buttonFnc);
+
+	function buttonFnc(e) {
+		
+
+		var myUrl1 = "https://jobs.github.com/positions.json?description=" + title + "&location=" + locat;
+
+		$.ajax({
+			url: myUrl1
+			,dataType: 'jsonp'
+			,success: function(r) {
+				console.log(r);
+				for (var i = 0; i < r.length; i++) {
+					var newStr = r[i].title;
+					var descr = r[i].description;
+					descrIneed = descr.substring(0,300);
+
+					console.log(r[i].title + descrIneed);
+	
+				myResults.append("TITLE" + newStr + "</H4>" + "<H4>" + descrIneed + "</H4>");
+				}
+			}		
+			
+				
+			})
+	}
+
+
+	</script>
+</body>
+</html>
+
+
+		<!-- var newStr = "<div>" + r[i].title + " - " + r[i].location +   -->

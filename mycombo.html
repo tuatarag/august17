@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background: black url('homepage-hero.jpg') no-repeat;
+            background-size: cover;
+            font-family: sans-serif;
+        }
+        #wrapper {
+            background-color: rgba(0, 0, 0, .66);
+            height: 100%;
+            color: white;
+            text-align: center;
+        }
+        .prompt {
+            color: white;
+            font-size: 1.5em;
+            padding-top: 200px;
+        }
+        input {
+            margin-top: 10px;
+            font-size: 2em;
+            font-weight: bold;
+            width: 300px;
+        }
+        #carOptions {
+            display: none;
+            background-color: white;
+            color: black;
+            font-size: 1.5em;
+            text-align: left;
+            width: 300px;
+            margin: auto;
+            padding: 0 7px;
+            box-sizing: border-box;
+            /*font-family: sans-serif;*/
+            font-weight: bold;
+        }
+
+        .carLine { color: black; }        
+        .carLine:hover {
+            background-color: cornflowerblue;
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+        <div class="prompt">Please select a car make:</div>
+        <input type="text" id="carText">
+        <div id="carOptions"></div>
+    </div>
+    <script>
+        var carMakes = ["Acura", "Alfa Romeo", "AMC", "Aston Martin", "ATV", "Auburn", "Audi", "Austin-Healey", "Bentley", "BMW", "Bricklin", "Buick", "Cadillac", "Chevy", "Chrysler", "Citroen", "Daewoo", "Daihatsu", "Datsun", "Delorean", "Dodge", "Eagle", "Edsel", "Ferrari", "Fiat", "Fisker", "Ford", "Geo", "GMC", "Graham", "Harley Davidson", "Honda", "Hudson", "Hummer", "Hyundai", "Infiniti", "International", "Isuzu", "Jaguar", "Jeep", "Kia", "Lamborghini", "Land Rover", "Lasalle", "Lexus", "Lincoln", "Lotus", "Marmon", "Maserati", "Maybach", "Mazda", "McLaren", "Mercedes-Benz", "Mercury", "Merkur", "MG", "MINI", "Mitsubishi", "Morgan", "Nash", "Nissan", "Oldsmobile", "Opel", "Packard", "Panoz", "Plymouth", "Pontiac", "Porsche", "Renault", "Rolls-Royce", "Saab", "Saturn", "Scion", "Smart", "Sterling", "Studebaker", "Subaru", "Sunbeam", "Suzuki", "Talbo", "Tesla", "Toyota", "Triumph", "Vanden Plas", "Volkswagen", "Volvo", "Willys", "Yugo"];
+
+        // Stuff to use later. We access these elements repeatedly.
+        var carTextElem = document.getElementById("carText");
+        var carOptionsElem = document.getElementById("carOptions");
+
+        // Start with a single event listener.
+        carTextElem.addEventListener("input", handleNewCarText);
+
+        // Handler for the click event, above.
+        function handleNewCarText() {
+            if (carTextElem.value === "") carOptions.style.display = "none";    // Reset the options when user deletes input.
+            else {
+                carOptionsElem.style.display = "block"; // Redisplay the options "pull-down" menu.
+
+                var currInput = carTextElem.value.toLowerCase();    // Get current text in input.
+                var newResults = [];    // Array to store our matches.
+                // Loop through all the car models to find matches to our current text input.
+                for (var i = 0; i < carMakes.length; i++) {
+                    var currCar = carMakes[i].toLowerCase();
+                    if (currCar.indexOf(currInput) === 0) {     // Compare current text input to model in array.
+                        newResults.push("<div class='carLine'>" + carMakes[i] + "</div>");  // Store match!
+                    }
+                }
+
+                // Turn the array into a long string HTML and inject into the DOM.
+                carOptionsElem.innerHTML = newResults.join("");
+
+                // var allLines = document.getElementsByClassName("carLine");
+                var allLines = document.querySelectorAll(".carLine");  // Same as above.
+                for (var i = 0; i < allLines.length; i++) {
+                    allLines[i].addEventListener("click", function () {
+                        var thisCarMake = this.innerHTML;   // Text inside DIV for each match.
+                        carTextElem.value = thisCarMake;    // Change the text input to be the match.
+                        carOptionsElem.style.display = "none";  // Hide the options "pull-down" menu.
+                        carTextElem.focus();    // Move the input caret/cursor to the text input box.
+                    });
+                }
+            }
+        }
+    </script>
+</body>
+</html>

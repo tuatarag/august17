@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		body {
+			margin: 100px 200px 200px 200px ;
+		}
+		#form {
+			width: 300px;
+			line-height: 20px;
+			letter-spacing: 1px;
+			text-align: left;
+		}
+
+	</style>
+</head>
+
+<body>
+
+<form method="GET" action="ikea_get_post_second.php" id="form">
+<br>
+<br>First name: <input type="text" name="FirstName" value="">
+<br>
+<br>Last name: <input type="text" name="LastName" value="">
+<br>
+<br>Email: <input type="text" name="Email">
+<br>
+<br>Store: <select name="StoreName"> 
+		<option value="X">  X</option>
+		<option value="Y">  Y</option>
+		<option value="Z">  Z</option>
+		<option value="W">  W</option>
+   </select> <br>
+ <br>
+ Comments and questions<textarea name="Comments"> </textarea>
+ <br>
+ 		<div>
+	 		<input type="checkbox" name="check"> <span>I agree to the IKEA privacy policy and to IKEA saving my personal information</span>
+		</div>
+<br><input type="submit" name="" value="SEND"><br>
+
+
+<?php
+$user =($_GET["FirstName"]);
+$userLast = ($_GET["LastName"]);
+$userEmail = ($_GET["Email"]);
+$userComments = ($_GET["Comments"]);
+
+$userDataArr = [$user, $userLast, $userEmail,$userComments];
+
+
+file_put_contents("data_fromIkea.csv",implode(",", $userDataArr),FILE_APPEND); 
+
+?>
+
+
+<div id="mainDiv"> 
+<span class ="webbr"> Your name is </span> <?php echo($user." ".$_GET["LastName"]);?> 
+
+<br> 
+<span class ="webbr">Your email address is:</span> <?php echo $_GET["Email"];?>
+<br>
+<span class ="webbr">The store you chose is:</span> <?php echo $_GET["StoreName"];?>
+<br>
+<span class ="webbr">Your comments are the following:</span> <?php echo $_GET["Comments"];?>
+<br>
+
+
+</body>
+
+</html>
